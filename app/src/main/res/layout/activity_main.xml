@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Et_login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150sp"
+            android:textColorHint="@color/white">
+
+            <EditText
+                android:id="@+id/Et_login"
+                android:layout_width="280dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="400dp"
+                android:textColor="@color/white"
+                android:hint="@string/login"
+                android:textColorHint="@color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Et_password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@+id/Et_login_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textColorHint="@color/white">
+
+            <EditText
+                android:id="@+id/Et_password"
+                android:layout_width="280dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:textColorHint="@color/white"
+                android:hint="@string/password"
+                android:textColor="@color/white"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sign_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:layout_below="@+id/Et_password_layout"
+            android:layout_marginTop="20sp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PathActivity"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:id="@+id/exp_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_weight="0.5"
+        android:background="#12727f"
+        android:onClick="toExpListItem">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#225a78"
+            android:gravity="center"
+            android:text="EXP"
+            android:textColor="@color/white"
+            android:textSize="48sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/farm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_weight="0.5"
+        android:background="#12727f"
+        android:clickable="false"
+        android:onClick="toFarmListItem">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#225a78"
+            android:gravity="center"
+            android:text="FARM"
+            android:textColor="@color/white"
+            android:textSize="48sp" />
+    </RelativeLayout>
+
+</LinearLayout>

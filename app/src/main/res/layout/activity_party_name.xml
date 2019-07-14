@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PartyNameActivity"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/type_party_name_tv"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:text="Type your party name"
+        android:gravity="center"
+        android:layout_marginTop="40dp"/>
+    <EditText
+        android:id="@+id/type_party_name_et"
+        android:layout_below="@+id/type_party_name_tv"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:hint="Type your party name"
+        android:textColorHint="@color/white"/>
+
+    <Button
+        android:id="@+id/save_name_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/type_party_name_et"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:text="Save Name"/>
+
+
+
+</RelativeLayout>
