@@ -11,13 +11,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final String TAG = "MainActivity";
+
 
         final EditText mLogin = findViewById(R.id.Et_login);
         final EditText mPassword = findViewById(R.id.Et_password);

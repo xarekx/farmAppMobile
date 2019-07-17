@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 public class PartyNameActivity extends AppCompatActivity {
 
+    final String TAG = "PartyNameActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

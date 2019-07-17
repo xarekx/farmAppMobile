@@ -1,6 +1,7 @@
 package com.example.farmapp;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class PartyActivity extends AppCompatActivity {
 
+    final String TAG = "PartyActivity";
     ArrayList<String> party = new ArrayList<>();
 
 
@@ -34,31 +36,26 @@ public class PartyActivity extends AppCompatActivity {
         final Button mPartySaveBtn = findViewById(R.id.save_party_btn);
         final Button mCreatePartyBtn = findViewById(R.id.create_party_button);
         final TextView mPartyName_Et = findViewById(R.id.party_name_tv);
-        mPartyName_Et.setText(party_name + " - party name");
+        mPartyName_Et.setText(party_name);
 
 
         mPartySaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 final LinearLayout linearLayout = findViewById(R.id.party_member_layout);
                 linearLayout.removeAllViews();
                 party.add(mParty_Et.getText().toString());
 
-
-
-
+                // visibility of create Party button
                 if(party.size()>1) {
                     mCreatePartyBtn.setVisibility(View.VISIBLE);
                     mCreatePartyBtn.setEnabled(true);
                 }
+
                 if(party.size()<8) {
 
                 for (int party_guest=0; party_guest<party.size();party_guest++) {
-
-
-
                     final TextView textView = new TextView(getApplicationContext());
                     textView.setText(party.get(party_guest));
                     textView.setGravity(Gravity.CENTER);
@@ -77,17 +74,16 @@ public class PartyActivity extends AppCompatActivity {
                                 if(textView.getText().toString().equals(party.get(z))) {
                                     party.remove(z);
                                     linearLayout.removeView(v);
+                                    //if less than 2 member in party
                                     if(party.size()<2) {
                                         mCreatePartyBtn.setVisibility(View.INVISIBLE);
                                         mCreatePartyBtn.setEnabled(false);
                                     }
                                 }
                             }
-
                         }
                     });
                 }
-
                 mParty_Et.setText("");
             } else {
 
@@ -123,40 +119,23 @@ public class PartyActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
                     }
-
-
                     Toast.makeText(PartyActivity.this, "Party count max 8 people", Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
-
-
         Toast.makeText(this, "Select your friends to farm !", Toast.LENGTH_SHORT).show();
 
        mCreatePartyBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               mPartySaveBtn.setEnabled(false);
+               Intent intent = new Intent(getApplicationContext(),PathActivity.class);
+               startActivity(intent);
                Toast.makeText(PartyActivity.this, "Party Created", Toast.LENGTH_SHORT).show();
 
            }
        });
 
-
-
-
-    }
-//
-
-    public List<String> createParty(String partyMember) {
-
-        List<String> party = new ArrayList<>();
-
-        party.add(partyMember);
-
-        return party;
     }
 }

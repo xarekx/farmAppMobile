@@ -3,12 +3,12 @@ package com.example.farmapp.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Mob {
-    @SerializedName("id_mob")
-    int id_mob;
-    @SerializedName("name_mob")
-    String name_mob;
-    @SerializedName("id_land_mob")
-    int id_land_mob;
+    @SerializedName("mob_id")
+    private int id_mob;
+    @SerializedName("mob_name")
+    private String name_mob;
+    @SerializedName("mob_zone_id")
+    private int id_land_mob;
 
     public Mob(int id_mob, String name_mob, int id_land_mob) {
         this.id_mob = id_mob;
