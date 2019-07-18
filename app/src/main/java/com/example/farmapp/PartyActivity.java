@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -16,9 +17,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.farmapp.Retrofit.RetrofitClientInstance;
+import com.example.farmapp.Retrofit.RetrofitPartyData;
+import com.example.farmapp.model.Party;
 
+import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+@SuppressWarnings("NullableProblems")
 public class PartyActivity extends AppCompatActivity {
 
     final String TAG = "PartyActivity";
@@ -30,7 +47,7 @@ public class PartyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party);
 
-        String party_name = getIntent().getStringExtra("party_name");
+        final String party_name = getIntent().getStringExtra("party_name");
 
         final EditText mParty_Et = findViewById(R.id.party_et);
         final Button mPartySaveBtn = findViewById(R.id.save_party_btn);
@@ -132,10 +149,41 @@ public class PartyActivity extends AppCompatActivity {
            public void onClick(View v) {
                Intent intent = new Intent(getApplicationContext(),PathActivity.class);
                startActivity(intent);
-               Toast.makeText(PartyActivity.this, "Party Created", Toast.LENGTH_SHORT).show();
+               Thread thread = new Thread(new Runnable() {
+                   @Override
+                   public void run() {
+                       Date date = new Date();
+                       String firstDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).format(date);
+                        createParty(new Party(party_name,firstDate,ArrayToString(party)));
 
+                   }
+               });
+               thread.start();
+               Toast.makeText(PartyActivity.this, "Party Created", Toast.LENGTH_SHORT).show();
            }
        });
 
+    }
+
+    public void createParty(Party party) {
+        RetrofitPartyData retrofitPartyData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitPartyData.class);
+        Call<Party> createPt = retrofitPartyData.createParty(party);
+
+        createPt.enqueue(new Callback<Party>() {
+            @Override
+            public void onResponse(Call<Party> call, Response<Party> response) {
+                Log.d(TAG,"SUCCESS");
+            }
+
+            @Override
+            public void onFailure(Call<Party> call, Throwable t) {
+               Log.d(TAG,"FAILURE",t);
+
+            }
+        });
+    }
+
+    public String ArrayToString(ArrayList arrayList) {
+        return "{\"names\":\""+arrayList.toString()+"\"}";
     }
 }
