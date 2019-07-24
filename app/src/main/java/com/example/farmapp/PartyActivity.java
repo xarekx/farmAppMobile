@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,7 +21,9 @@ import android.widget.Toast;
 
 import com.example.farmapp.Retrofit.RetrofitClientInstance;
 import com.example.farmapp.Retrofit.RetrofitPartyData;
+import com.example.farmapp.Retrofit.RetrofitUserData;
 import com.example.farmapp.model.Party;
+import com.example.farmapp.model.User;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -40,6 +44,7 @@ public class PartyActivity extends AppCompatActivity {
 
     final String TAG = "PartyActivity";
     ArrayList<String> party = new ArrayList<>();
+    ArrayList<String> nicknames = new ArrayList<>();
 
 
     @Override
@@ -49,10 +54,13 @@ public class PartyActivity extends AppCompatActivity {
 
         final String party_name = getIntent().getStringExtra("party_name");
 
-        final EditText mParty_Et = findViewById(R.id.party_et);
+        final AutoCompleteTextView mParty_Et = findViewById(R.id.party_et);
         final Button mPartySaveBtn = findViewById(R.id.save_party_btn);
         final Button mCreatePartyBtn = findViewById(R.id.create_party_button);
         final TextView mPartyName_Et = findViewById(R.id.party_name_tv);
+        getAllUsers();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,nicknames);
+        mParty_Et.setAdapter(arrayAdapter);
         mPartyName_Et.setText(party_name);
 
 
@@ -154,7 +162,7 @@ public class PartyActivity extends AppCompatActivity {
                    public void run() {
                        Date date = new Date();
                        String firstDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).format(date);
-                        createParty(new Party(party_name,firstDate,ArrayToString(party)));
+                        createParty(new Party(party_name,firstDate,arrayToString(party)));
 
                    }
                });
@@ -183,7 +191,39 @@ public class PartyActivity extends AppCompatActivity {
         });
     }
 
-    public String ArrayToString(ArrayList arrayList) {
-        return "{\"names\":\""+arrayList.toString()+"\"}";
+    //method to convert array to String with quotes
+    public String arrayToString(ArrayList arrayList) {
+        ArrayList<String> partyWithQuote = new ArrayList<>();
+        for (int i=0;i<arrayList.size();i++) {
+            partyWithQuote.add("'"+arrayList.get(i)+"'");
+        }
+
+        return "{\"players\":\""+partyWithQuote+"\"}";
     }
+
+    //method to getting information about users
+    public void getAllUsers() {
+        RetrofitUserData retrofitUserData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitUserData.class);
+        Call<List<User>> getAllUsers = retrofitUserData.getAllUsers();
+
+        getAllUsers.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                assert response.body() != null;
+                for(int i = 0; i<response.body().size(); i++) {
+
+                    nicknames.add(response.body().get(i).getNickname());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
+                Log.w(TAG, "onFailure: ",t );
+
+            }
+        });
+    }
+
+
 }
