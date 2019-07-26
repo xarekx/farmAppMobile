@@ -40,8 +40,13 @@ public class FarmMobActivity extends AppCompatActivity {
 
                 assert response.body()!=null;
                 for (int mob=0; mob<response.body().size(); mob++) {
-                    if (response.body().get(mob).getId_land_mob() == 1) {
-                        farmMobList.add(response.body().get(mob).getName_mob());
+                    if(response.body().get(mob).getId_land_mob()==1 ) {
+                        if(response.body().get(mob).getName_mob().contains("_")) {
+                            String myMob = response.body().get(mob).getName_mob().replace("_"," ");
+                            farmMobList.add(myMob);
+                        } else {
+                            farmMobList.add(response.body().get(mob).getName_mob());
+                        }
                     }
                 }
                 farmListView = findViewById(R.id.farm_list_view);

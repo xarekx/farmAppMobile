@@ -1,9 +1,7 @@
 package com.example.farmapp;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +21,8 @@ import com.example.farmapp.Retrofit.RetrofitUserData;
 import com.example.farmapp.model.Party;
 import com.example.farmapp.model.User;
 
-import java.io.IOException;
-import java.sql.Time;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -59,7 +51,7 @@ public class PartyActivity extends AppCompatActivity {
         final Button mCreatePartyBtn = findViewById(R.id.create_party_button);
         final TextView mPartyName_Et = findViewById(R.id.party_name_tv);
         getAllUsers();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,nicknames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,nicknames);
         mParty_Et.setAdapter(arrayAdapter);
         mPartyName_Et.setText(party_name);
 

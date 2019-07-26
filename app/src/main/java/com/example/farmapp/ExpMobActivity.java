@@ -41,7 +41,12 @@ public class ExpMobActivity extends AppCompatActivity {
                 assert response.body()!=null;
                 for(int mob=0;mob<response.body().size();mob++) {
                     if(response.body().get(mob).getId_land_mob()==2 ) {
-                        expMobList.add(response.body().get(mob).getName_mob());
+                        if(response.body().get(mob).getName_mob().contains("_")) {
+                            String myMob = response.body().get(mob).getName_mob().replace("_"," ");
+                            expMobList.add(myMob);
+                        } else {
+                            expMobList.add(response.body().get(mob).getName_mob());
+                        }
                     }
                 }
                 Log.d(TAG,"retrofit success");
