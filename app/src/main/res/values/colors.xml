@@ -5,5 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#fff</color>
     <color name="card">#002E2A</color>
-    <color name="listItem">#855f00</color>
+    <color name="listItem">#113321</color>
+    <color name="black">#000</color>
 </resources>

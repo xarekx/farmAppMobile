@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ExpMobActivity"></activity>
+        <activity android:name=".LootActivity"/>
+        <activity android:name=".ExpMobActivity" />
         <activity android:name=".PartyNameActivity" />
         <activity android:name=".PartyActivity" />
         <activity android:name=".FarmMobActivity" />

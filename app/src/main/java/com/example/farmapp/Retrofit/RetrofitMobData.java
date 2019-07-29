@@ -1,5 +1,6 @@
 package com.example.farmapp.Retrofit;
 
+import com.example.farmapp.model.Item;
 import com.example.farmapp.model.Mob;
 
 
@@ -17,6 +18,8 @@ public interface RetrofitMobData {
     Call<List<Mob>> getAllMobs();
 
     @GET("mobs/{id}")
-    Call<Mob> getMob(@Path("id") int id);
+    Call<List<Item>> getAllItemsByMobId(@Path("id") int id);
+
+
 
 }

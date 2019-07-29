@@ -1,8 +1,11 @@
 package com.example.farmapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,18 +21,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressWarnings("ALL")
 public class ExpMobActivity extends AppCompatActivity {
 
     final String TAG = "ExpMobActivity";
 
     ArrayList<String> expMobList = new ArrayList<>();
     ListView expListView ;
+    CustomAdapter customAdapter;
+
     public static int [] prgmImages = {R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz,R.drawable.booro_cz};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exp_mob);
+        expListView = findViewById(R.id.exp_list_view);
+
+        getAllExpMobs();
+
+        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getApplicationContext(),LootActivity.class);
+                intent.putExtra("mobPosition",position+1); // sending position not mob_id
+                startActivity(intent);
+            }
+        });
+
+    }
+        // TO_
+    public void getAllExpMobs() {
 
         RetrofitMobData retrofitMobData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitMobData.class);
         Call<List<Mob>> call =  retrofitMobData.getAllMobs();
@@ -38,20 +61,23 @@ public class ExpMobActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<Mob>> call, Response<List<Mob>> response) {
-                assert response.body()!=null;
-                for(int mob=0;mob<response.body().size();mob++) {
-                    if(response.body().get(mob).getId_land_mob()==2 ) {
-                        if(response.body().get(mob).getName_mob().contains("_")) {
-                            String myMob = response.body().get(mob).getName_mob().replace("_"," ");
+                List<Mob> resp = response.body();
+                assert resp!=null;
+                for(int mob=0;mob<resp.size();mob++) {
+                    if(resp.get(mob).getId_land_mob()==2 ) {
+                        System.out.println(resp.get(mob).getId_mob());
+                        if(resp.get(mob).getName_mob().contains("_")) {
+                            String myMob = resp.get(mob).getName_mob().replace("_"," ");
                             expMobList.add(myMob);
+
                         } else {
-                            expMobList.add(response.body().get(mob).getName_mob());
+                            expMobList.add(resp.get(mob).getName_mob());
                         }
                     }
                 }
+                customAdapter = new CustomAdapter(expMobList,getApplicationContext(),prgmImages);
+                expListView.setAdapter(customAdapter);
                 Log.d(TAG,"retrofit success");
-                expListView = findViewById(R.id.exp_list_view);
-                expListView.setAdapter(new CustomAdapter(expMobList,getApplicationContext(),prgmImages));
             }
 
             @Override
