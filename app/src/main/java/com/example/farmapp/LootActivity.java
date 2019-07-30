@@ -1,8 +1,7 @@
 package com.example.farmapp;
 
-import android.content.ClipData;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.farmapp.Retrofit.RetrofitClientInstance;
@@ -18,7 +17,7 @@ import retrofit2.Response;
 @SuppressWarnings("ALL")
 public class LootActivity extends AppCompatActivity {
 
-    private int mobPosition;
+    private String mobInfo;
     private static final String TAG = "LootActivity";
 
     @Override
@@ -26,13 +25,16 @@ public class LootActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loot);
 
-         mobPosition = getIntent().getIntExtra("mobPosition",0);
+         mobInfo = getIntent().getStringExtra("mobPosition");
+         String mobPosition = mobInfo.substring(1,2);
 
-         getAllItemsByMobId(mobPosition);
+        System.out.println(mobPosition);
+
+        getAllItemsByMobId(mobPosition);
     }
 
 
-    public void getAllItemsByMobId(int id) {
+    public void getAllItemsByMobId(String id) {
 
         RetrofitMobData retrofitMobData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitMobData.class);
 

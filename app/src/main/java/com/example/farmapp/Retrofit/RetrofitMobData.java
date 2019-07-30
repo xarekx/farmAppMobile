@@ -18,7 +18,7 @@ public interface RetrofitMobData {
     Call<List<Mob>> getAllMobs();
 
     @GET("mobs/{id}")
-    Call<List<Item>> getAllItemsByMobId(@Path("id") int id);
+    Call<List<Item>> getAllItemsByMobId(@Path("id") String id);
 
 
 

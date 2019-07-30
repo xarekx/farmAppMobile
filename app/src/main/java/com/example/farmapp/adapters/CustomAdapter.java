@@ -15,6 +15,7 @@ import com.example.farmapp.LootActivity;
 import com.example.farmapp.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustomAdapter extends BaseAdapter {
 
@@ -27,7 +28,6 @@ public class CustomAdapter extends BaseAdapter {
         this.mobNameList = mobNameList;
         this.context = context;
         this.imageId = imageId;
-
     }
 
     @Override
@@ -55,12 +55,7 @@ public class CustomAdapter extends BaseAdapter {
         holder.img = rowView.findViewById(R.id.mob_image);
         holder.tv.setText(mobNameList.get(position));
         holder.img.setImageResource(imageId[position]);
-//        rowView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, ""+mobNameList.get(position), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
         return rowView;
     }
 
