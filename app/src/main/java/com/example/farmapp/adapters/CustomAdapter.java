@@ -48,6 +48,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final Holder holder = new Holder();
+
         View rowView;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rowView =  layoutInflater.inflate(R.layout.list_item,parent,false);

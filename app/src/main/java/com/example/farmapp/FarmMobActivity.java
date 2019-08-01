@@ -94,6 +94,8 @@ public class FarmMobActivity extends AppCompatActivity {
                     Log.d(TAG,"retrofit failure", t);
 
                 }
+
+
             });
 
         }
