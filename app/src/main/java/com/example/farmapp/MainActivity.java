@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 String login = mLogin.getText().toString();
                 String password = mPassword.getText().toString();
                 if(login.equals("arek") && password.equals("123")) {
-                    Intent intent = new Intent(getApplicationContext(), PartyNameActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PathActivity.class);
                     startActivity(intent);
                     Toast.makeText(MainActivity.this, "Welcome in FarmApp!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onClick: true");
                 } else {
                     Toast.makeText(MainActivity.this, "Wrong Login or Password!", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onClick: error");
+                    Log.w(TAG, "onClick: failure");
                 }
             }
         });
