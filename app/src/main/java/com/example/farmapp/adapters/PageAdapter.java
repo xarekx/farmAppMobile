@@ -4,9 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.farmapp.FirstItemTab;
-import com.example.farmapp.LootActivity;
-import com.example.farmapp.SecondItemTab;
+import com.example.farmapp.itemActivity.FirstItemTab;
+import com.example.farmapp.itemActivity.SecondItemTab;
 
 public class PageAdapter extends FragmentStatePagerAdapter {
 

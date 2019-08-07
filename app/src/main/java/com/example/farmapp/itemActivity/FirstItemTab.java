@@ -1,5 +1,7 @@
-package com.example.farmapp;
+package com.example.farmapp.itemActivity;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,10 +14,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.farmapp.R;
 import com.example.farmapp.Retrofit.RetrofitClientInstance;
 import com.example.farmapp.Retrofit.RetrofitMobData;
 import com.example.farmapp.adapters.CustomItemAdapter;
 import com.example.farmapp.adapters.GridViewAdapter;
+import com.example.farmapp.itemActivity.SharedViewModel;
 import com.example.farmapp.model.Item;
 
 import java.util.ArrayList;
@@ -32,28 +36,35 @@ public class FirstItemTab extends Fragment {
     View view;
     private ArrayList<String> myItems = new ArrayList<>();
     private ArrayList<Integer> myPhotos = new ArrayList<>();
-    private String TAG = "arek";
+    private String TAG = "FristItemTab";
+    SharedViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         String mobInfo = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("mobPosition");
         String mobPosition = mobInfo.substring(1,2);
-
+        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
         view = inflater.inflate(R.layout.first_item_tab, container, false);
         GridView gv = view.findViewById(R.id.gridViewFragment1);
 
         getAllItemsByMobId(mobPosition,this.myItems,this.myPhotos, gv);
 
+
+
+
+
+
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                viewModel.setText(""+parent.getItemAtPosition(position));
                 Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), ""+parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
-
 
     }
 
@@ -84,6 +95,4 @@ public class FirstItemTab extends Fragment {
             }
         });
     }
-
-
 }

@@ -1,12 +1,14 @@
-package com.example.farmapp;
+package com.example.farmapp.itemActivity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.GridView;
 
+import com.example.farmapp.R;
 import com.example.farmapp.adapters.PageAdapter;
 
 public class LootActivity extends AppCompatActivity {
@@ -20,7 +22,7 @@ public class LootActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         final ViewPager viewPager = findViewById(R.id.view_pager);
-        TabLayout tabLayout = findViewById(R.id.table_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
 
         setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText("Items"));

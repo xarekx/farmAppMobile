@@ -154,7 +154,7 @@ public class PartyActivity extends AppCompatActivity {
                    public void run() {
                        Date date = new Date();
                        String firstDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).format(date);
-                        createParty(new Party(party_name,firstDate,arrayToString(party)));
+                       createParty(new Party(party_name,firstDate,arrayToString(party)));
 
                    }
                });

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 String login = mLogin.getText().toString();
                 String password = mPassword.getText().toString();
                 if(login.equals("arek") && password.equals("123")) {
-                    Intent intent = new Intent(getApplicationContext(), PathActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PartyNameActivity.class);
                     startActivity(intent);
                     Toast.makeText(MainActivity.this, "Welcome in FarmApp!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onClick: true");

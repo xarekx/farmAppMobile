@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.farmapp.Retrofit.RetrofitClientInstance;
 import com.example.farmapp.Retrofit.RetrofitMobData;
 import com.example.farmapp.adapters.CustomAdapter;
+import com.example.farmapp.itemActivity.LootActivity;
 import com.example.farmapp.model.Mob;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class FarmMobActivity extends AppCompatActivity {
                         myMob = arrayList.get(i).values().toString();
                     }
                 }
-                Intent intent = new Intent(getApplicationContext(),LootActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LootActivity.class);
                 intent.putExtra("mobPosition",myMob);
                 startActivity(intent);
             }
