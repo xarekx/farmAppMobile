@@ -7,4 +7,6 @@
     <string name="select_your_friends_to_party">Select Your Friends to party !</string>
     <string name="save_to_party">Save to Party</string>
     <string name="create_party">Create Party</string>
+    <string name="save_name">Save Name</string>
+    <string name="type_your_party_name">Type your party name</string>
 </resources>
