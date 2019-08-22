@@ -37,7 +37,7 @@ public class FirstItemTab extends Fragment {
     private ArrayList<String> myItems = new ArrayList<>();
     private ArrayList<Integer> myPhotos = new ArrayList<>();
     private String TAG = "FristItemTab";
-    SharedViewModel viewModel;
+    private SharedViewModel viewModel;
 
     @Nullable
     @Override
@@ -45,7 +45,7 @@ public class FirstItemTab extends Fragment {
 
         String mobInfo = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("mobPosition");
         String mobPosition = mobInfo.substring(1,2);
-        viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(SharedViewModel.class);
         view = inflater.inflate(R.layout.first_item_tab, container, false);
         GridView gv = view.findViewById(R.id.gridViewFragment1);
 

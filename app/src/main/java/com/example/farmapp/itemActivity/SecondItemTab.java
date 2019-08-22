@@ -16,15 +16,19 @@ import android.widget.TextView;
 import com.example.farmapp.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class SecondItemTab extends Fragment {
 
     private SharedViewModel viewModel;
     private TextView textView;
-//    private TextView nTextView;
     LinearLayout linearLayout;
     ArrayList<String> arrayList = new ArrayList<>();
+
+    HashMap<String,Integer> hashmapItem = new HashMap<>();
     View view;
 
     @Nullable
@@ -32,8 +36,6 @@ public class SecondItemTab extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.second_item_tab,container,false);
         linearLayout = view.findViewById(R.id.linear_item_layout);
-
-        System.out.println("createView");
 
         return view;
 
@@ -49,6 +51,7 @@ public class SecondItemTab extends Fragment {
                 @Override
                 public void onChanged(@Nullable String s) {
                     arrayList.add(s);
+                    valueOfHashmap(arrayList);
                     linearLayout.removeAllViews();
                     for(int i=0;i<arrayList.size();i++) {
                         final TextView nTextView = new TextView(getActivity());
@@ -64,6 +67,23 @@ public class SecondItemTab extends Fragment {
 
 
             });
+
+        }
+
+        private void valueOfHashmap(ArrayList<String> arrayItem) {
+            HashMap<String,Integer> counts = new HashMap<>();
+
+            for(String str : arrayItem ) {
+                if(counts.containsKey(str)) {
+                    counts.put(str,counts.get(str)+1);
+                } else {
+                    counts.put(str,1);
+                }
+
+            }
+            for (Map.Entry<String,Integer> entry : counts.entrySet()) {
+                System.out.println(entry.getKey() +  ":" + entry.getValue());
+            }
 
         }
 }
