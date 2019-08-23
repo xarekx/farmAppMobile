@@ -7,35 +7,35 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.farmapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class SecondItemTab extends Fragment {
 
     private SharedViewModel viewModel;
-    private TextView textView;
-    LinearLayout linearLayout;
     ArrayList<String> arrayList = new ArrayList<>();
+    TableLayout tableLayout;
 
-    HashMap<String,Integer> hashmapItem = new HashMap<>();
+    TreeMap<String,Integer> hashmapItem = new TreeMap<>();
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.second_item_tab,container,false);
-        linearLayout = view.findViewById(R.id.linear_item_layout);
+        tableLayout = view.findViewById(R.id.table_layout);
 
         return view;
 
@@ -51,17 +51,20 @@ public class SecondItemTab extends Fragment {
                 @Override
                 public void onChanged(@Nullable String s) {
                     arrayList.add(s);
-                    valueOfHashmap(arrayList);
-                    linearLayout.removeAllViews();
-                    for(int i=0;i<arrayList.size();i++) {
-                        final TextView nTextView = new TextView(getActivity());
-                        nTextView.setText(arrayList.get(i));
-                        nTextView.setTextSize(16);
-                        nTextView.setTextColor(Color.WHITE);
-                        nTextView.setPadding(4,4,4,4);
+                    hashmapItem = valueOfHashmap(arrayList);
+                    tableLayout.removeAllViews();
 
+                    for(HashMap.Entry<String,Integer> entry : hashmapItem.entrySet()) {
 
-                        linearLayout.addView(nTextView);
+                        TableRow tr = new TableRow(getActivity());
+
+                        tr.setLayoutParams(getLayoutParams());
+                        tr.setWeightSum(2);
+                        tr.addView(getTextViewParam(entry.getKey(),0));
+                        tr.addView(getTextViewParam(""+entry.getValue(),1));
+
+                        tableLayout.addView(tr);
+
                     }
                 }
 
@@ -70,8 +73,8 @@ public class SecondItemTab extends Fragment {
 
         }
 
-        private void valueOfHashmap(ArrayList<String> arrayItem) {
-            HashMap<String,Integer> counts = new HashMap<>();
+        private TreeMap<String,Integer> valueOfHashmap(ArrayList<String> arrayItem) {
+            TreeMap<String,Integer> counts = new TreeMap<>();
 
             for(String str : arrayItem ) {
                 if(counts.containsKey(str)) {
@@ -79,11 +82,39 @@ public class SecondItemTab extends Fragment {
                 } else {
                     counts.put(str,1);
                 }
-
             }
-            for (Map.Entry<String,Integer> entry : counts.entrySet()) {
-                System.out.println(entry.getKey() +  ":" + entry.getValue());
-            }
-
+            return counts;
         }
+
+        private TableRow.LayoutParams getLayoutParams() {
+            return new TableRow.LayoutParams(
+                    0,
+                    TableRow.LayoutParams.WRAP_CONTENT,1f);
+        }
+
+        private TextView getTextViewParam(String value,int flag) {
+            TextView textView = new TextView(getActivity());
+            if(flag == 1) {
+                textView.setGravity(Gravity.CENTER);
+            } else {
+                textView.setGravity(Gravity.NO_GRAVITY);
+            }
+            textView.setTextColor(Color.WHITE);
+            textView.setTextSize(15);
+            textView.setPadding(8,8,8,8);
+            textView.setLayoutParams(getLayoutParams());
+            textView.setText(value);
+
+            return textView;
+        }
+
+
+
+
+
+
+
+
+
+
 }
