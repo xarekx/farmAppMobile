@@ -28,7 +28,7 @@ public class SecondItemTab extends Fragment {
     ArrayList<String> arrayList = new ArrayList<>();
     TableLayout tableLayout;
 
-    TreeMap<String,Integer> hashmapItem = new TreeMap<>();
+    TreeMap<String,Integer> treeMapItem = new TreeMap<>();
     View view;
 
     @Nullable
@@ -51,10 +51,10 @@ public class SecondItemTab extends Fragment {
                 @Override
                 public void onChanged(@Nullable String s) {
                     arrayList.add(s);
-                    hashmapItem = valueOfHashmap(arrayList);
+                    treeMapItem = valueOfHashmap(arrayList);
                     tableLayout.removeAllViews();
 
-                    for(HashMap.Entry<String,Integer> entry : hashmapItem.entrySet()) {
+                    for(HashMap.Entry<String,Integer> entry : treeMapItem.entrySet()) {
 
                         TableRow tr = new TableRow(getActivity());
 
@@ -64,7 +64,6 @@ public class SecondItemTab extends Fragment {
                         tr.addView(getTextViewParam(""+entry.getValue(),1));
 
                         tableLayout.addView(tr);
-
                     }
                 }
 
@@ -89,32 +88,27 @@ public class SecondItemTab extends Fragment {
         private TableRow.LayoutParams getLayoutParams() {
             return new TableRow.LayoutParams(
                     0,
-                    TableRow.LayoutParams.WRAP_CONTENT,1f);
+                    TableRow.LayoutParams.MATCH_PARENT,1f);
         }
 
         private TextView getTextViewParam(String value,int flag) {
             TextView textView = new TextView(getActivity());
             if(flag == 1) {
                 textView.setGravity(Gravity.CENTER);
+                textView.setLayoutParams(getLayoutParams());
+                textView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             } else {
                 textView.setGravity(Gravity.NO_GRAVITY);
+                textView.setLayoutParams(getLayoutParams());
+                textView.setBackgroundColor(getResources().getColor(R.color.itemColor));
             }
             textView.setTextColor(Color.WHITE);
             textView.setTextSize(15);
             textView.setPadding(8,8,8,8);
-            textView.setLayoutParams(getLayoutParams());
             textView.setText(value);
 
             return textView;
         }
-
-
-
-
-
-
-
-
 
 
 }

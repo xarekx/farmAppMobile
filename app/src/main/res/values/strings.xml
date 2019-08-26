@@ -9,4 +9,5 @@
     <string name="create_party">Create Party</string>
     <string name="save_name">Save Name</string>
     <string name="type_your_party_name">Type your party name</string>
+    <string name="save_drop">Save Drop</string>
 </resources>

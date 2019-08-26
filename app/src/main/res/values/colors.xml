@@ -7,4 +7,5 @@
     <color name="card">#002E2A</color>
     <color name="listItem">#113321</color>
     <color name="black">#000</color>
+    <color name="itemColor">#260057</color>
 </resources>
