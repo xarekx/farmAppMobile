@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class User {
 
-    int user_id;
-    String username;
-    String password;
-    String nickname;
-    String email;
-    Date last_login;
-    Date joined_date;
+    private int id;
+    private String username;
+    private String password;
+    private String nickname;
+    private String email;
+    private Date last_login;
+    private Date joined_date;
 
 
     public User() {
@@ -18,7 +18,7 @@ public class User {
     }
 
     public User(int user_id, String username, String password, String nickname, String email, Date last_login, Date joined_date) {
-        this.user_id = user_id;
+        this.id = user_id;
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -28,11 +28,11 @@ public class User {
     }
 
     public int getUser_id() {
-        return user_id;
+        return id;
     }
 
     public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        this.id = user_id;
     }
 
     public String getUsername() {
