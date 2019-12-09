@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 public interface RetrofitUserData {
 
 
-    @GET("/users/all")
+    @GET("/user/users")
     Call<List<User>> getAllUsers();
 }

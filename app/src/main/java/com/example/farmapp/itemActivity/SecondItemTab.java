@@ -58,16 +58,12 @@ public class SecondItemTab extends Fragment {
 
                         TableRow tr = new TableRow(getActivity());
 
-                        System.out.println("key: " + entry.getKey());
-                        System.out.println(entry.getValue());
-
                         tr.setLayoutParams(getLayoutParams());
                         tr.setWeightSum(2);
                         tr.addView(getTextViewParam(entry.getKey(),0));
                         tr.addView(getTextViewParam(""+entry.getValue(),1));
 
                         tableLayout.addView(tr);
-
                     }
                 }
 

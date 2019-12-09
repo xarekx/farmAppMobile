@@ -19,6 +19,8 @@ public class PartyNameActivity extends AppCompatActivity {
         final EditText mPartyName_Et = findViewById(R.id.type_party_name_et);
         final Button mPartyName_Btn = findViewById(R.id.save_name_btn);
 
+
+
         mPartyName_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

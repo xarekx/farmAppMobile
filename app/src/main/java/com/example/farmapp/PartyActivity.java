@@ -3,7 +3,6 @@ package com.example.farmapp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +19,6 @@ import com.example.farmapp.Retrofit.RetrofitClientInstance;
 import com.example.farmapp.Retrofit.RetrofitPartyData;
 import com.example.farmapp.Retrofit.RetrofitUserData;
 import com.example.farmapp.model.Party;
-import com.example.farmapp.model.PartyMember;
 import com.example.farmapp.model.User;
 
 import java.text.SimpleDateFormat;
@@ -156,8 +154,7 @@ public class PartyActivity extends AppCompatActivity {
                    public void run() {
                        Date date = new Date();
                        String firstDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).format(date);
-                       createParty(new Party(0,party_name, firstDate));
-
+                       createParty(new Party(party_name,firstDate,arrayToString(party)));
 
                    }
                });
@@ -180,32 +177,20 @@ public class PartyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Party> call, Throwable t) {
-                Log.e(TAG, "onFailure: ",t );
+               Log.d(TAG,"FAILURE",t);
 
             }
         });
     }
 
-    public void saveMembers(PartyMember partyMember) {
+    //method to convert array to String with quotes
+    public String arrayToString(ArrayList arrayList) {
+        ArrayList<String> partyWithQuote = new ArrayList<>();
+        for (int i=0;i<arrayList.size();i++) {
+            partyWithQuote.add("'"+arrayList.get(i)+"'");
+        }
 
-        RetrofitPartyData retrofitPartyData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitPartyData.class);
-        Call<PartyMember> partyMemberCall = retrofitPartyData.saveMembers(partyMember);
-
-        partyMemberCall.enqueue(new Callback<PartyMember>() {
-            @Override
-            public void onResponse(Call<PartyMember> call, Response<PartyMember> response) {
-
-                Log.d(TAG, "onResponse: SUCCESS");
-            }
-
-            @Override
-            public void onFailure(Call<PartyMember> call, Throwable t) {
-
-                Log.e(TAG, "onFailure: ", t);
-
-            }
-        });
-
+        return "{\"players\":\""+partyWithQuote+"\"}";
     }
 
     //method to getting information about users
@@ -230,28 +215,6 @@ public class PartyActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    //getting numbers of Party. Last is ours
-    public void getMaxIndex() {
-        RetrofitPartyData retrofitPartyData = RetrofitClientInstance.getRetrofitInstance().create(RetrofitPartyData.class);
-        final Call<Integer> index = retrofitPartyData.getMaxIndex();
-
-        index.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-
-                Log.d(TAG, "onResponse: SUCCESS");
-
-            }
-
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-
-                Log.e(TAG, "onFailure: ",t );
-            }
-        });
-
     }
 
 
