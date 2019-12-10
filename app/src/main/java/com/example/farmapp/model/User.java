@@ -12,7 +12,6 @@ public class User {
     private Date last_login;
     private Date joined_date;
 
-
     public User() {
 
     }

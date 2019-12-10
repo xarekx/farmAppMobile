@@ -7,13 +7,12 @@ public class Party {
     private int party_id;
     private String party_name;
     private String party_date;
-    private String member_id;
 
 
-    public Party(String party_name, String party_date, String member_id) {
+    public Party(int party_id, String party_name, String party_date) {
+        this.party_id = party_id;
         this.party_name = party_name;
         this.party_date = party_date;
-        this.member_id = member_id;
     }
 
     public Party() {
@@ -44,13 +43,6 @@ public class Party {
         this.party_date = party_date;
     }
 
-    public String getMember_id() {
-        return member_id;
-    }
-
-    public void setMember_id(String member_id) {
-        this.member_id = member_id;
-    }
 
 
 

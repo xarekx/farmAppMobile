@@ -154,7 +154,7 @@ public class PartyActivity extends AppCompatActivity {
                    public void run() {
                        Date date = new Date();
                        String firstDate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).format(date);
-                       createParty(new Party(party_name,firstDate,arrayToString(party)));
+                       createParty(new Party(0,party_name,firstDate));
 
                    }
                });
@@ -181,16 +181,6 @@ public class PartyActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    //method to convert array to String with quotes
-    public String arrayToString(ArrayList arrayList) {
-        ArrayList<String> partyWithQuote = new ArrayList<>();
-        for (int i=0;i<arrayList.size();i++) {
-            partyWithQuote.add("'"+arrayList.get(i)+"'");
-        }
-
-        return "{\"players\":\""+partyWithQuote+"\"}";
     }
 
     //method to getting information about users
